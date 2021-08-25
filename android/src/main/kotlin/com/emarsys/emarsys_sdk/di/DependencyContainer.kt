@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.emarsys.emarsys_sdk.command.EmarsysCommandFactory
 import com.emarsys.emarsys_sdk.event.EventHandlerFactory
 import com.emarsys.emarsys_sdk.mapper.InboxResultMapper
+import com.emarsys.emarsys_sdk.mapper.ProductsMapper
 import com.emarsys.emarsys_sdk.notification.NotificationChannelFactory
 import com.emarsys.emarsys_sdk.storage.PushTokenStorage
 
@@ -43,4 +44,6 @@ interface DependencyContainer {
     val notificationChannelFactory: NotificationChannelFactory
 
     val inboxResultMapper: InboxResultMapper
+
+    val productsMapper: ProductsMapper
 }

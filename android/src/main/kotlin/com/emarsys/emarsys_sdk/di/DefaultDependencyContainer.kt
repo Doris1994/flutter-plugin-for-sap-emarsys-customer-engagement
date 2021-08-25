@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.emarsys.emarsys_sdk.command.EmarsysCommandFactory
 import com.emarsys.emarsys_sdk.event.EventHandlerFactory
 import com.emarsys.emarsys_sdk.mapper.InboxResultMapper
+import com.emarsys.emarsys_sdk.mapper.ProductsMapper
 import com.emarsys.emarsys_sdk.notification.NotificationChannelFactory
 import com.emarsys.emarsys_sdk.storage.PushTokenStorage
 import io.flutter.plugin.common.BinaryMessenger
@@ -21,7 +22,8 @@ class DefaultDependencyContainer(
             eventHandlerFactory,
             sharedPreferences,
             notificationChannelFactory,
-            inboxResultMapper
+            inboxResultMapper,
+            productsMapper
         )
     }
     override val sharedPreferences: SharedPreferences by lazy {
@@ -39,5 +41,9 @@ class DefaultDependencyContainer(
 
     override val inboxResultMapper: InboxResultMapper by lazy {
         InboxResultMapper()
+    }
+
+    override val productsMapper: ProductsMapper by lazy {
+        ProductsMapper()
     }
 }

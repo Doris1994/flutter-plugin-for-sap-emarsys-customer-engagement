@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:emarsys_sdk/api/predict.dart';
 import 'package:emarsys_sdk/api/push.dart';
 import 'package:emarsys_sdk/mappers/message_mapper.dart';
+import 'package:emarsys_sdk/mappers/products_mapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:io' show Platform;
@@ -21,6 +23,8 @@ class Emarsys {
   static Push push = Push(_channel, _pushEventChannel, _silentPushEventChannel);
 
   static Config config = Config(_channel);
+
+  static Predict predict = Predict(_channel, ProductsMapper());
   
   static MessageInbox messageInbox = MessageInbox(_channel, MessageMapper());
 

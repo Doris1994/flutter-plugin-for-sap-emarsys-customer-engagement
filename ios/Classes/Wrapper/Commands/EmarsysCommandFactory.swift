@@ -52,6 +52,8 @@ class EmarsysCommandFactory {
             result = AddTagCommand()
         case "inbox.removeTag":
             result = RemoveTagCommand()
+        case "predict.recommendationLogicRelated":
+            result = RelateProductsCommand()
         default:
             result = nil
         }

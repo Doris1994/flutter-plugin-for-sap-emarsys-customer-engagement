@@ -13,8 +13,10 @@ import com.emarsys.emarsys_sdk.command.mobileengage.push.PushSendingEnabledComma
 import com.emarsys.emarsys_sdk.command.mobileengage.push.RegisterNotificationChannelsCommand
 import com.emarsys.emarsys_sdk.command.setup.InitializeCommand
 import com.emarsys.emarsys_sdk.command.setup.SetupCommand
+import com.emarsys.emarsys_sdk.command.predict.*
 import com.emarsys.emarsys_sdk.event.EventHandlerFactory
 import com.emarsys.emarsys_sdk.mapper.InboxResultMapper
+import com.emarsys.emarsys_sdk.mapper.ProductsMapper
 import com.emarsys.emarsys_sdk.notification.NotificationChannelFactory
 import com.emarsys.emarsys_sdk.storage.PushTokenStorage
 
@@ -25,7 +27,8 @@ class EmarsysCommandFactory(
     private val eventHandlerFactory: EventHandlerFactory,
     private val sharedPreferences: SharedPreferences,
     private val notificationChannelFactory: NotificationChannelFactory,
-    private val inboxResultMapper: InboxResultMapper
+    private val inboxResultMapper: InboxResultMapper,
+    private val productsMapper: ProductsMapper
 ) {
 
     fun create(methodName: String): EmarsysCommand? {
@@ -58,6 +61,10 @@ class EmarsysCommandFactory(
             "inbox.fetchMessages" -> FetchMessagesCommand(inboxResultMapper)
             "inbox.addTag" -> AddTagCommand()
             "inbox.removeTag" -> RemoveTagCommand()
+            "predict.recommendationLogicRelated" -> RelatedProductsCommand(productsMapper)
+            "predict.recommendationLogicHome" -> HomeProductsCommand(productsMapper)
+            "predict.recommendationLogicPersonal" -> PersonalProductsCommand(productsMapper)
+            "predict.recommendationLogicCart" -> CartProductsCommand(productsMapper)
             else -> null
         }
     }
