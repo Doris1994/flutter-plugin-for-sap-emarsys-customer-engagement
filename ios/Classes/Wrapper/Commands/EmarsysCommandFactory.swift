@@ -8,11 +8,13 @@ class EmarsysCommandFactory {
     var pushEventHandler: EMSEventHandlerBlock
     var silentPushEventHandler: EMSEventHandlerBlock
     var inboxMapper: InboxMapper
+    var productsMapper: ProductsMapper
     
-    init(pushEventHandler: @escaping EMSEventHandlerBlock, silentPushEventHandler: @escaping EMSEventHandlerBlock, inboxMapper: InboxMapper) {
+    init(pushEventHandler: @escaping EMSEventHandlerBlock, silentPushEventHandler: @escaping EMSEventHandlerBlock, inboxMapper: InboxMapper,productsMapper: ProductsMapper) {
         self.pushEventHandler = pushEventHandler
         self.silentPushEventHandler = silentPushEventHandler
         self.inboxMapper = inboxMapper
+        self.productsMapper = productsMapper
     }
 
     func create(name: String) -> EmarsysCommandProtocol? {
@@ -53,7 +55,13 @@ class EmarsysCommandFactory {
         case "inbox.removeTag":
             result = RemoveTagCommand()
         case "predict.recommendationLogicRelated":
-            result = RelateProductsCommand()
+            result = RelateProductsCommand(mapper: productsMapper)
+        case "predict.recommendationLogicHome":
+            result = HomeProductsCommand(mapper: productsMapper)
+        case "predict.recommendationLogicPersonal":
+            result = PersonalProductsCommand(mapper: productsMapper)
+        case "predict.recommendationLogicCart":
+            result = CartProductsCommand(mapper: productsMapper)
         default:
             result = nil
         }

@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:emarsys_sdk/mappers/products_mapper.dart';
 import 'package:emarsys_sdk/model/cart_item.dart';
